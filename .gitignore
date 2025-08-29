@@ -1,0 +1,41 @@
+# Build artifacts
+builds/*.box
+builds/*.vmdk
+builds/*.vdi
+builds/*.ovf
+
+# Packer cache
+packer_cache/
+
+# VirtualBox files
+*.vbox
+*.vbox-prev
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Vagrant files
+.vagrant/
+*.box
+
+# Credentials and secrets
+*.pem
+*.key
+secrets.json
