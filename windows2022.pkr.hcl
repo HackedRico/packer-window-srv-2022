@@ -10,8 +10,8 @@ packer {
 
 variable "iso_url" {
   type    = string
-#   default = "https://software-static.download.prss.microsoft.com/sg/download/888969d5-f34g-4e03-ac9d-1f9786c66749/SERVER_EVAL_x64FRE_en-us.iso"
-  default = "images/windows-srv-2022.iso"
+  default = "https://software-static.download.prss.microsoft.com/sg/download/888969d5-f34g-4e03-ac9d-1f9786c66749/SERVER_EVAL_x64FRE_en-us.iso"
+#  default = "images/windows-srv-2022.iso"
 }
 
 variable "iso_checksum" {
@@ -90,8 +90,8 @@ build {
   }
 
   # Create Vagrant box
-#   post-processor "vagrant" {
-#     compression_level = 9
-#     output           = "builds/{{.Provider}}-windows-server-2022.box"
-#   }
+  post-processor "vagrant" {
+    compression_level = 9
+    output           = "builds/{{.Provider}}-windows-server-2022.box"
+   }
 }
