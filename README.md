@@ -1,6 +1,10 @@
 # Windows Server 2022 Packer Template
 
-This repository contains a Packer template for building a Windows Server 2022 VirtualBox image with minimal network configuration, designed for use with Terraform and Ansible.
+This repository contains a Packer template for building a Windows Server 2022 VirtualBox image with minimal network configuration, designed for use with Terraform, Ansible, and exported as Vagrant Box.
+
+All credentials, firewall rules, and security relaxations in this template support disposable development and lab environments; review and harden them.
+
+> This repository is published for reference and learning purposes.
 
 ## Features
 
@@ -15,7 +19,8 @@ This repository contains a Packer template for building a Windows Server 2022 Vi
 
 1. **VirtualBox**: Install VirtualBox on your system
 2. **Packer**: Install HashiCorp Packer
-3. **Internet Connection**: For downloading the Windows Server 2022 ISO
+3. **Windows Server 2022 ISO**: The template defaults to downloading the evaluation ISO directly from Microsoft (`var.iso_url` in `windows2022.pkr.hcl`). To supply your own copy, download it manually, place it somewhere convenient (for example `images/windows-srv-2022.iso`), and override `iso_url`.
+4. **Internet Connection**: Required for the ISO download, Windows updates, and grabbing PowerShell modules during the build
 
 ## File Structure
 
@@ -44,6 +49,8 @@ packer validate windows2022.pkr.hcl
 # Build the image
 packer build windows2022.pkr.hcl
 ```
+
+If your ISO lives elsewhere, override the source path: `packer build -var "iso_url=/path/to/SERVER_EVAL_x64FRE_en-us.iso" windows2022.pkr.hcl`.
 
 ### 2. Add to Vagrant
 
@@ -195,14 +202,14 @@ provisioner "powershell" {
 
 ## Security Notes
 
-- Default credentials are for development use only
-- Change passwords in production environments
-- Consider disabling unnecessary services
-- Review firewall configurations
+- Default credentials are for development use only; update the `winrm_password`, local account password, and disable auto-logon outside a lab
+- `setup-ansible.ps1` lowers password complexity requirements and enables HTTP WinRM—reinstate stronger policies for secure deployments
+- Replace the self-signed WinRM certificate with one issued by a trusted CA if HTTPS access is required
+- Consider disabling unnecessary services and reviewing firewall configurations before exposing the VM
 
 ## License
 
-This template is provided as-is for educational and development purposes.
+This project is available under the [MIT License](LICENSE).
 
 ---
 
