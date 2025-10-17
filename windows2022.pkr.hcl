@@ -5,6 +5,10 @@ packer {
       version = ">= 1.0.4"
       source  = "github.com/hashicorp/virtualbox"
     }
+    vagrant = {
+      source  = "github.com/hashicorp/vagrant"
+      version = "~> 1"
+    }
   }
 }
 
