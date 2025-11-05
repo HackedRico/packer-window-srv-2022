@@ -53,6 +53,7 @@ source "virtualbox-iso" "windows2022" {
     "Autounattend.xml",
     "scripts/enable-winrm.ps1",
     "scripts/enable-rdp.ps1",
+    "scripts/install-guest-additions.ps1",
     "scripts/setup-ansible.ps1",
     "scripts/cleanup.ps1"
   ]
@@ -76,6 +77,11 @@ build {
   # Enable RDP
   provisioner "powershell" {
     script = "scripts/enable-rdp.ps1"
+  }
+
+  # Install VirtualBox Guest Additions
+  provisioner "powershell" {
+    script = "scripts/install-guest-additions.ps1"
   }
 
   # Setup for Ansible
