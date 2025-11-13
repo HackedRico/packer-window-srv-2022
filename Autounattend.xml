@@ -165,7 +165,5 @@
             <RegisteredOwner/>
         </component>
     </settings>
-
-    <!-- ✅ Updated to explicitly install GUI (Desktop Experience) edition -->
     <cpi:offlineImage cpi:source="wim:c:/install.wim#Windows Server 2022 Standard (Desktop Experience)" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>

@@ -106,6 +106,6 @@ build {
   # Create Vagrant box
   post-processor "vagrant" {
     compression_level = 9
-    output           = "builds/{{.Provider}}-windows-server-2022.box"
+    output           = "builds/windows-server-2022.box"
    }
 }
