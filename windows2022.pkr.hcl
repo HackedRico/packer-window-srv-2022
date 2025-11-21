@@ -46,10 +46,9 @@ source "virtualbox-iso" "windows2022" {
   disk_size            = 61440
   memory               = 4096
   cpus                 = 2
-  boot_wait            = "20s"
+  boot_wait            = "5s"
   boot_command         = [
-    "<enter><wait2>",
-    "<enter><wait2>"
+    "<wait10><wait10><wait10>"
   ]
   
   # Floppy files for automated installation
