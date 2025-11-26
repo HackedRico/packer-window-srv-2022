@@ -40,6 +40,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Nam
 # Disable “new network detected” prompt logic
 New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Network" -Name "NewNetworkWindowOff" -PropertyType DWord -Value 1 -Force
 
+# Force all newly detected Ethernet networks to default to "Private" instead of "Public"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\DefaultMediaCost" -Name "Ethernet" -Value 1 -Force
+
 # Disable NLA active probing (faster boot)
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet" -Name "EnableActiveProbing" -Value 0 -PropertyType DWord -Force
 
