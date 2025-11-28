@@ -50,8 +50,8 @@
                 <OSImage>
                     <InstallFrom>
                         <MetaData wcm:action="add">
-                            <Key>/IMAGE/INDEX</Key>
-                            <Value>2</Value>
+                            <Key>/IMAGE/NAME</Key>
+                            <Value>Windows Server 2022 SERVERSTANDARDEVAL (Desktop Experience)</Value>
                         </MetaData>
                     </InstallFrom>
                     <InstallTo>
@@ -165,5 +165,4 @@
             <RegisteredOwner/>
         </component>
     </settings>
-    <cpi:offlineImage cpi:source="wim:c:/install.wim#Windows Server 2022 Standard (Desktop Experience)" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
