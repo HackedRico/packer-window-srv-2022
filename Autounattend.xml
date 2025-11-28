@@ -130,7 +130,7 @@
                     <Order>2</Order>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell.exe -ExecutionPolicy Bypass -Command "foreach($drive in Get-PSDrive -PSProvider FileSystem){if(Test-Path \"$($drive.Name):\enable-winrm.ps1\"){&amp; \"$($drive.Name):\enable-winrm.ps1\"; break}}"</CommandLine>
+                    <CommandLine>cmd.exe /c powershell.exe -ExecutionPolicy Bypass -Command "$ProgressPreference='SilentlyContinue'; Invoke-WebRequest -Uri 'http://10.0.2.2:8100/enable-winrm.ps1' -OutFile 'C:\Windows\Temp\enable-winrm.ps1' -UseBasicParsing; &amp; 'C:\Windows\Temp\enable-winrm.ps1'"</CommandLine>
                     <Description>Enable WinRM</Description>
                     <Order>3</Order>
                 </SynchronousCommand>

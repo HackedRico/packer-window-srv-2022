@@ -51,15 +51,15 @@ source "virtualbox-iso" "windows2022" {
     "<wait10><wait10><wait10>"
   ]
   
-  # Use CD instead of floppy for better reliability
+  # Use CD for Autounattend.xml (Windows installer needs it on CD/floppy)
   cd_files = [
-    "Autounattend.xml",
-    "scripts/enable-winrm.ps1",
-    "scripts/enable-rdp.ps1",
-    "scripts/install-guest-additions.ps1",
-    "scripts/setup-ansible.ps1",
-    "scripts/cleanup.ps1"
+    "Autounattend.xml"
   ]
+  
+  # Serve scripts via HTTP instead of CD/floppy
+  http_directory = "scripts"
+  http_port_min  = 8100
+  http_port_max  = 8100
   
   # VirtualBox settings for minimal network configuration
   vboxmanage = [
@@ -67,20 +67,12 @@ source "virtualbox-iso" "windows2022" {
     ["modifyvm", "{{.Name}}", "--natpf1", "winrm-ssl,tcp,,5986,,5986"],
     ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,3389,,3389"]
   ]
-  
-  # Remove floppy controller to prevent floppy-related errors
-  vboxmanage_post = [
-    ["storagectl", "{{.Name}}", "--name", "Floppy Controller", "--remove"]
-  ]
 }
 
 build {
   sources = ["source.virtualbox-iso.windows2022"]
 
-  # Enable WinRM HTTP and HTTPS
-  provisioner "powershell" {
-    script = "scripts/enable-winrm.ps1"
-  }
+  # WinRM already enabled by Autounattend.xml, so skip the redundant call
 
   # Enable RDP
   provisioner "powershell" {
