@@ -4,18 +4,34 @@ Write-Host "Setting up system for Ansible compatibility..."
 # Install PowerShell modules required for Ansible
 Write-Host "Installing required PowerShell modules..."
 
-# Set PowerShell execution policy
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
+# Set PowerShell execution policy (suppress warnings)
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force -ErrorAction SilentlyContinue
 
-# Install NuGet provider (required for PowerShell Gallery)
-Install-PackageProvider -Name NuGet -Force -Confirm:$false
+# Try to install NuGet provider (skip if no internet)
+Write-Host "Attempting to install NuGet provider (will skip if offline)..."
+try {
+    Install-PackageProvider -Name NuGet -Force -Confirm:$false -ErrorAction Stop
+    Write-Host "NuGet provider installed successfully."
+} catch {
+    Write-Host "Warning: Could not install NuGet provider (likely offline). Skipping..."
+}
 
-# Trust PowerShell Gallery
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+# Try to configure PowerShell Gallery (skip if no internet)
+try {
+    Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction Stop
+    Write-Host "PowerShell Gallery configured."
+} catch {
+    Write-Host "Warning: Could not configure PowerShell Gallery. Skipping..."
+}
 
-# Install required modules for Ansible
-Install-Module -Name PowerShellGet -Force -AllowClobber
-Install-Module -Name PackageManagement -Force -AllowClobber
+# Try to install modules (skip if no internet)
+try {
+    Install-Module -Name PowerShellGet -Force -AllowClobber -ErrorAction Stop
+    Install-Module -Name PackageManagement -Force -AllowClobber -ErrorAction Stop
+    Write-Host "PowerShell modules installed successfully."
+} catch {
+    Write-Host "Warning: Could not install PowerShell modules (likely offline). Skipping..."
+}
 
 # Configure WinRM for Ansible
 Write-Host "Configuring WinRM for Ansible..."
