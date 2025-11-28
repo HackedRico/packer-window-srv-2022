@@ -32,6 +32,7 @@ variable "vm_name" {
 source "virtualbox-iso" "windows2022" {
   iso_url              = var.iso_url
   iso_checksum         = var.iso_checksum
+  guest_os_type        = "Windows2022_64"
   communicator         = "winrm"
   winrm_username       = "vagrant"
   winrm_password       = "vagrant"
