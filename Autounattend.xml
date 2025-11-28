@@ -130,7 +130,7 @@
                     <Order>2</Order>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c powershell.exe -ExecutionPolicy Bypass -File A:\enable-winrm.ps1</CommandLine>
+                    <CommandLine>cmd.exe /c powershell.exe -ExecutionPolicy Bypass -Command "foreach($drive in Get-PSDrive -PSProvider FileSystem){if(Test-Path \"$($drive.Name):\enable-winrm.ps1\"){&amp; \"$($drive.Name):\enable-winrm.ps1\"; break}}"</CommandLine>
                     <Description>Enable WinRM</Description>
                     <Order>3</Order>
                 </SynchronousCommand>

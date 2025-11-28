@@ -51,8 +51,8 @@ source "virtualbox-iso" "windows2022" {
     "<wait10><wait10><wait10>"
   ]
   
-  # Floppy files for automated installation
-  floppy_files = [
+  # Use CD instead of floppy for better reliability
+  cd_files = [
     "Autounattend.xml",
     "scripts/enable-winrm.ps1",
     "scripts/enable-rdp.ps1",
