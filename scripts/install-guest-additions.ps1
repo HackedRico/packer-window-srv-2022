@@ -9,8 +9,7 @@ $guestAdditionsExe = $null
 
 while ($attempt -lt $maxAttempts -and -not $guestAdditionsExe) {
     $candidateDrives = Get-PSDrive -PSProvider FileSystem | Where-Object {
-        Test-Path "$($_.Root)VBoxWindowsAdditions.exe" -or
-        Test-Path "$($_.Root)VBoxWindowsAdditions-amd64.exe"
+        (Test-Path "$($_.Root)VBoxWindowsAdditions.exe") -or (Test-Path "$($_.Root)VBoxWindowsAdditions-amd64.exe")
     }
 
     if ($candidateDrives) {
