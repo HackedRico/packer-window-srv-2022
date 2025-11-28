@@ -65,8 +65,7 @@ source "virtualbox-iso" "windows2022" {
   vboxmanage = [
     ["modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,5985,,5985"],
     ["modifyvm", "{{.Name}}", "--natpf1", "winrm-ssl,tcp,,5986,,5986"],
-    ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,3389,,3389"],
-    ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,2222,,2222"]
+    ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,3389,,3389"]
   ]
 }
 
