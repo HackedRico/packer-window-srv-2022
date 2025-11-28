@@ -47,12 +47,9 @@ source "virtualbox-iso" "windows2022" {
   disk_size            = 61440
   memory               = 4096
   cpus                 = 2
-  boot_wait            = "5s"
-  boot_command         = [
-    "<wait10><wait10><wait10>"
-  ]
+  boot_wait            = "3s"
   
-  # Use CD for Autounattend.xml (Windows installer needs it on CD/floppy)
+  # Secondary ISO with Autounattend.xml attached as CD (more reliable than floppy in VirtualBox)
   cd_files = [
     "Autounattend.xml"
   ]
@@ -66,7 +63,9 @@ source "virtualbox-iso" "windows2022" {
   vboxmanage = [
     ["modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,5985,,5985"],
     ["modifyvm", "{{.Name}}", "--natpf1", "winrm-ssl,tcp,,5986,,5986"],
-    ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,3389,,3389"]
+    ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,3389,,3389"],
+    ["modifyvm", "{{.Name}}", "--boot1", "dvd"],
+    ["modifyvm", "{{.Name}}", "--boot2", "disk"]
   ]
 }
 

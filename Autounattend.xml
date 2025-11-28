@@ -50,8 +50,8 @@
                 <OSImage>
                     <InstallFrom>
                         <MetaData wcm:action="add">
-                            <Key>/IMAGE/NAME</Key>
-                            <Value>Windows Server 2022 SERVERSTANDARDEVAL (Desktop Experience)</Value>
+                            <Key>/IMAGE/INDEX</Key>
+                            <Value>2</Value>
                         </MetaData>
                     </InstallFrom>
                     <InstallTo>
@@ -59,7 +59,7 @@
                         <PartitionID>2</PartitionID>
                     </InstallTo>
                     <InstallToAvailablePartition>false</InstallToAvailablePartition>
-                    <WillShowUI>OnError</WillShowUI>
+                    <WillShowUI>Never</WillShowUI>
                 </OSImage>
             </ImageInstall>
             <UserData>
