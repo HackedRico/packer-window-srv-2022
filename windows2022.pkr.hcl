@@ -67,6 +67,11 @@ source "virtualbox-iso" "windows2022" {
     ["modifyvm", "{{.Name}}", "--natpf1", "winrm-ssl,tcp,,5986,,5986"],
     ["modifyvm", "{{.Name}}", "--natpf1", "rdp,tcp,,3389,,3389"]
   ]
+  
+  # Remove floppy controller to prevent floppy-related errors
+  vboxmanage_post = [
+    ["storagectl", "{{.Name}}", "--name", "Floppy Controller", "--remove"]
+  ]
 }
 
 build {
